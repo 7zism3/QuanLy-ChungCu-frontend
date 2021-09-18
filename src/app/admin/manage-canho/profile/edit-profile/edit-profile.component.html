@@ -1,0 +1,110 @@
+<mat-accordion>
+  <mat-expansion-panel expanded="true" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Thông tin người dùng
+      </mat-panel-title>
+      <mat-panel-description>
+        Thay đổi thông tin
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <form (ngSubmit)="updateProfile()" [formGroup]="profileEditForm">
+      <div class="full-name-inputs">
+        <p>
+          <mat-form-field appearance="standard">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="pat@example.com" [formControlName]="'email'" required>
+            <mat-icon
+              [ngClass]="{'red-icon': !profileEditForm.get('email').valid && profileEditForm.get('email').touched}"
+              matSuffix>email
+            </mat-icon>
+            <mat-hint *ngIf="!profileEditForm.get('email').valid && profileEditForm.get('email').touched"
+              style="color: rgb(211, 102, 102);">Error is blank
+            </mat-hint>
+          </mat-form-field>
+        </p>
+      </div>
+      <div class="full-name-inputs">
+        <p>
+          <ngx-uploader type="Kéo thả ảnh mới" height="190px" width="205px " hiddenImage="true" hiddenForm="false"
+            (linkFile)="getImage($event)"></ngx-uploader>
+        </p>
+        <p>
+          <img [src]="this.profileEditForm.get('image').value"
+            style="padding-top: 8px; border-radius: 8%; height: 197px; width: 205px">
+        </p>
+      </div>
+      <mat-dialog-actions align="end">
+        <button mat-flat-button mat-dialog-close>Thoát</button>
+        <button [disabled]="(!profileEditForm.valid)" mat-flat-button color="primary">Sửa</button>
+      </mat-dialog-actions>
+    </form>
+  </mat-expansion-panel>
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Bảo mật
+      </mat-panel-title>
+      <mat-panel-description>
+        {{panelOpenState ? 'Đổi mật khẩu' : 'Hãy nhập vào mật khẩu muốn đổi'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <form [formGroup]="passwordEditForm">
+      <div class="full-name-inputs">
+        <p>
+          <mat-form-field appearance="standard">
+            <mat-label>Mật khẩu cũ</mat-label>
+            <input [type]="hide ? 'password' : 'text'" matInput placeholder="Vui lòng nhập lại mật khẩu cũ"
+              [formControlName]="'password'" required>
+            <button
+              [ngClass]="{'red-icon': !passwordEditForm.get('password').valid && passwordEditForm.get('password').touched}"
+              mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-hint *ngIf="!passwordEditForm.get('password').valid && passwordEditForm.get('password').touched"
+              style="color: rgb(211, 102, 102);">Error is blank
+            </mat-hint>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="standard">
+            <mat-label>Mật khẩu mới</mat-label>
+            <input [type]="hide2 ? 'password' : 'text'" matInput placeholder="Nhập mật khẩu mới"
+              [formControlName]="'passwordEdit'" required>
+            <button
+              [ngClass]="{'red-icon': !passwordEditForm.get('passwordEdit').valid && passwordEditForm.get('passwordEdit').touched}"
+              mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide2">
+              <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}} </mat-icon>
+            </button>
+            <mat-hint
+              *ngIf="!passwordEditForm.get('passwordEdit').valid && passwordEditForm.get('passwordEdit').touched"
+              style="color: rgb(211, 102, 102);">Error is blank
+            </mat-hint>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="standard">
+            <mat-label>Nhập lại mật khẩu mới</mat-label>
+            <input type="password" matInput placeholder="Vui lòng nhập lại nhập lại mật khẩu"
+              [formControlName]="'confirmPassword'" required>
+            <mat-icon
+              [ngClass]="{'red-icon': !passwordEditForm.get('confirmPassword').valid && passwordEditForm.get('confirmPassword').touched}"
+              matSuffix>password
+            </mat-icon>
+            <mat-hint *ngIf="passwordEditForm.hasError('mismatch')" style="color: rgb(211, 102, 102);">Mật khẩu không
+              trùng nhau
+            </mat-hint>
+          </mat-form-field>
+        </p>
+      </div>
+      <mat-dialog-actions align="end">
+        <button mat-flat-button mat-dialog-close>Thoát</button>
+        <button (click)="editPassword()" [disabled]="(!passwordEditForm.valid)" mat-flat-button color="primary">Đổi mật
+          khẩu
+        </button>
+      </mat-dialog-actions>
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>
