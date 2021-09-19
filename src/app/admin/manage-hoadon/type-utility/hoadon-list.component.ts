@@ -70,6 +70,7 @@ export class HoaDonListComponent implements OnInit {
     "stt",
     "ngayTao",
     "trangThai",
+    "boPhan",
     "nhanVien",
     "canHo",
     "id",
@@ -133,6 +134,7 @@ export class HoaDonListComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
+        this.getAllHoaDonDichVu();
         // this.dataSource;
       }
     });

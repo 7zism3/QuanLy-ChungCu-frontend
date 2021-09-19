@@ -1,3 +1,4 @@
+import { routes } from "./../../../app-routing.module";
 import {
   animate,
   state,
@@ -28,6 +29,7 @@ import { CanhoService } from "../../../shared/service/canHo/canho.service";
 import { AddCudanComponent } from "./add-cudan/add-cudan.component";
 import { CanHo } from "../../../shared/model/canHo/canho";
 import { AddTaikhoanCanhoComponent } from "./add-taikhoan-canho/add-taikhoan-canho.component";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "ngx-list-employee",
@@ -73,7 +75,8 @@ export class CanHoComponent implements OnInit, AfterViewInit {
     private dialog: MatDialog,
     private employeeService: EmployeeService,
     private toastrService: ToastService,
-    private canHoService: CanhoService
+    private canHoService: CanhoService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -95,7 +98,7 @@ export class CanHoComponent implements OnInit, AfterViewInit {
     );
   }
 
-  private getAllEmployee() {
+  getAllEmployee() {
     this.employeeService.getAllEmployee().subscribe(
       (data) => {
         this.employee.data = data;
@@ -105,7 +108,7 @@ export class CanHoComponent implements OnInit, AfterViewInit {
       }
     );
   }
-  private getAllCanHo() {
+  getAllCanHo() {
     this.canHoService.getAllCanHo().subscribe(
       (data) => {
         this.canHo.data = data;
@@ -116,7 +119,7 @@ export class CanHoComponent implements OnInit, AfterViewInit {
       }
     );
   }
-  private getAllCanHoKhongHoatDong() {
+  getAllCanHoKhongHoatDong() {
     this.canHoService.getAllCanHoKhongHoatDong().subscribe(
       (data) => {
         this.canHoKhongHoatDong.data = data;
@@ -126,7 +129,7 @@ export class CanHoComponent implements OnInit, AfterViewInit {
       }
     );
   }
-  private getAllEmployeeLock() {
+  getAllEmployeeLock() {
     this.employeeService.getAllEmployeeLock().subscribe(
       (data) => {
         this.employeeLock.data = data;
@@ -191,8 +194,10 @@ export class CanHoComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
         this.updateCanHo(canHo);
+        this.canHoKhongHoatDong.data = [];
         this.getAllCanHoKhongHoatDong();
         this.getAllCanHo();
+        this.router.navigateByUrl("/admin/manage-canho/detail/"+ canHo.id);
       }
     });
   }

@@ -11,6 +11,7 @@ import { CanHo } from "../../../../shared/model/canHo/canho";
 import { CanhoService } from "../../../../shared/service/canHo/canho.service";
 import { E } from "@angular/cdk/keycodes";
 import { type } from "os";
+import { messages } from "../../../../shared/component/module/extra-components/chat/messages";
 
 @Component({
   selector: "ngx-add-employee",
@@ -113,7 +114,7 @@ export class AddCanHoComponent implements OnInit {
       },
       (error) => {
         throwError(error);
-        this.toastrService.showToast("danger", "Thất bại", "Thêm thất bại");
+        this.toastrService.showToast("danger", "Thất bại", "Trùng tên căn hộ");
       }
     );
   }

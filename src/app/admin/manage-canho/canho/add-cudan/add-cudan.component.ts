@@ -67,25 +67,24 @@ export class AddCudanComponent implements OnInit {
       hoTen: new FormControl(null, Validators.required),
       gioiTinh: new FormControl(null, Validators.required),
       ngaySinh: new FormControl(null, Validators.required),
-      soCCCD: new FormControl(null, Validators.required),
+      soCCCD: new FormControl(null),
       diaChi: new FormControl(null, Validators.required),
       hinhAnh: new FormControl(null),
       soDienThoai: new FormControl(null, [
-        Validators.required,
         Validators.pattern(/((09|03|07|08|05)+([0-9]{8})\b)/),
       ]),
-      email: new FormControl(null, [Validators.required, Validators.email]),
+      email: new FormControl(null, [Validators.email]),
     });
     this.cuDanEditForm = new FormGroup({
       id: new FormControl(null),
       hoTen: new FormControl(null, Validators.required),
       gioiTinh: new FormControl(null, Validators.required),
       ngaySinh: new FormControl(null, Validators.required),
-      soCCCD: new FormControl(null, Validators.required),
+      soCCCD: new FormControl(null),
       diaChi: new FormControl(null, Validators.required),
       hinhAnh: new FormControl(null),
-      soDienThoai: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required, Validators.email]),
+      soDienThoai: new FormControl(null),
+      email: new FormControl(null, [ Validators.email]),
     });
     if (this.data.id) {
       this.canHoService.getCanHoById(this.data.id).subscribe(

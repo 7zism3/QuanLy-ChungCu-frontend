@@ -57,10 +57,13 @@
           </ng-container>
           <ng-container matColumnDef="account">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Tài khoản </th>
-            <td mat-cell *matCellDef="let element"> <button mat-button *ngIf="element.idTaiKhoan == null"
-                (click)="openAddTaiKhoan(element.id)" color="accent">Tạo tài
+            <td mat-cell *matCellDef="let element"> <button mat-raised-button *ngIf="element.idTaiKhoan == null"
+                (click)="openAddTaiKhoan(element.id)" color="primary">Tạo tài
                 khoản</button>
-              <p *ngIf="element.idTaiKhoan != null">Đã có</p>
+              <p *ngIf="(element.idTaiKhoan != null)"
+                [ngStyle]="{'color': element.taiKhoan.enabled == false ? 'red':'green'}">
+                {{element.taiKhoan.enabled ? 'Đã kích hoạt' : 'Chưa kích hoạt'}}
+              </p>
             </td>
           </ng-container>
           <ng-container matColumnDef="expandedDetail">

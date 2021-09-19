@@ -16,10 +16,10 @@
   <div class="body-content">
     <hr>
     <div class="titleBody">
-      <p *ngIf="this.type == 'HDDV'">Thông báo thu phí dịch vụ cố định tháng {{this.data.month}} -Hoá đơn số:
-        {{this.chiTietDichVu[0].hoaDonDichVu.id}}</p>
-      <p *ngIf="this.type == 'HDSC'">Thông báo thu phí sửa chữa tháng {{this.data.month}} - Hoá đơn số:
-        {{this.chiTietDichVu[0].hoaDonSuaChua.id}}</p>
+      <h4 *ngIf="this.type == 'HDDV'">Thông báo thu phí dịch vụ cố định tháng {{this.data.month}} -Hoá đơn số:
+        {{this.chiTietDichVu[0].hoaDonDichVu.id}}</h4>
+      <h4 *ngIf="this.type == 'HDSC'">Thông báo thu phí sửa chữa tháng {{this.data.month}} - Hoá đơn số:
+        {{this.chiTietDichVu[0].hoaDonSuaChua.id}}</h4>
     </div>
     <!-- <div class="numberTB" *ngIf="this.type == 'HDDV'">
       <p>Hoá đơn số: {{this.chiTietDichVu[0].hoaDonDichVu.id}}</p>
@@ -30,6 +30,7 @@
   </div>
   <div class="body-content2">
     <div class="nameLeft">
+      <br />
       <p>Tên khách hàng: {{this.canHo.chuCanHo.hoTen}}</p>
       <p>Mã căn hộ: {{this.canHo.tenCanHo}}</p>
     </div>
@@ -56,8 +57,8 @@
         <tr *ngFor="let data of chiTietDichVu; let i = index">
           <th>{{i+1}}</th>
           <th>{{data.dichVuCoDinh.ten}}</th>
-          <th>{{data.soLuong}}</th>
           <th>{{data.donGia}}</th>
+          <th>{{data.soLuong}}</th>
           <th>{{data.donGia * data.soLuong}}</th>
         </tr>
         <tr>
@@ -76,15 +77,15 @@
         </tr>
 
         <tr *ngFor="let data of chiTietDichVu; let i = index">
-          <th>{{i+1}}</th>
-          <th>{{data.loaiSuaChua.ten}}</th>
-          <th>{{data.soLuong}}</th>
-          <th>{{data.donGia}}</th>
-          <th>{{data.donGia * data.soLuong}}</th>
+          <td>{{i+1}}</td>
+          <td>{{data.loaiSuaChua.ten}}</td>
+          <td>{{data.soLuong}}</td>
+          <td>{{data.donGia}}</td>
+          <td>{{data.donGia * data.soLuong}}</td>
         </tr>
         <tr>
-          <td colspan="4">Tổng cộng</td>
-          <td>{{sum()}}</td>
+          <th colspan="4">Tổng cộng</th>
+          <th>{{sum()}}</th>
         </tr>
 
       </table>
@@ -276,7 +277,7 @@
     </div>
     <div class="title-content2">
       Tổng thanh toán: <table border="1" style="float: right; margin-right: 420px;">
-        <td>924,788</td>
+        <td>{{sum()}}</td>
       </table>
     </div>
     <div class="title-content5">

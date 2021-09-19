@@ -152,6 +152,12 @@
               {{element.trangThai ? "Đã thanh toán" : ""}}
             </td>
           </ng-container>
+          <ng-container matColumnDef="boPhan">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Bộ phận </th>
+            <td mat-cell *matCellDef="let element">
+              {{element.nhanVien.boPhan.ten}}
+            </td>
+          </ng-container>
           <ng-container matColumnDef="nhanVien">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Nhân viên </th>
             <td mat-cell *matCellDef="let element">

@@ -2,11 +2,11 @@
   <mat-expansion-panel expanded="true" hideToggle>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Thông tin cư dân
+        Thêm mới cư dân
       </mat-panel-title>
 
       <mat-panel-description>
-        Thay đổi thông tin cá nhân
+        Thêm thông tin cá nhân
       </mat-panel-description>
     </mat-expansion-panel-header>
     <form (ngSubmit)="createCuDan()" [formGroup]="cuDanAddForm">
@@ -42,7 +42,7 @@
         <p>
           <mat-form-field appearance="standard">
             <mat-label>Số điện thoại</mat-label>
-            <input matInput placeholder="Vui lòng nhập số điện thoại" [formControlName]="'soDienThoai'" required>
+            <input matInput placeholder="Vui lòng nhập số điện thoại" [formControlName]="'soDienThoai'">
             <mat-icon
               [ngClass]="{'red-icon': !cuDanAddForm.get('soDienThoai').valid && cuDanAddForm.get('soDienThoai').touched}"
               matSuffix>phone
@@ -57,7 +57,7 @@
         <p>
           <mat-form-field appearance="standard">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="pat@example.com" [formControlName]="'email'" required>
+            <input matInput placeholder="pat@example.com" [formControlName]="'email'">
             <mat-icon [ngClass]="{'red-icon': !cuDanAddForm.get('email').valid && cuDanAddForm.get('email').touched}"
               matSuffix>email
             </mat-icon>
@@ -82,7 +82,7 @@
         <p>
           <mat-form-field appearance="standard">
             <mat-label>Số CCCD</mat-label>
-            <input type="text" matInput placeholder="Vui lòng nhập ngày sinh" [formControlName]="'soCCCD'" required>
+            <input type="text" matInput placeholder="Vui lòng nhập ngày sinh" [formControlName]="'soCCCD'">
             <mat-icon [ngClass]="{'red-icon': !cuDanAddForm.get('soCCCD').valid && cuDanAddForm.get('soCCCD').touched}"
               matSuffix>people
             </mat-icon>
@@ -111,7 +111,7 @@
             (linkFile)="getImage($event)"></ngx-uploader>
         </p>
         <p>
-          <img [src]="this.cuDanAddForm.get('image').value"
+          <img [src]="this.cuDanAddForm.get('hinhAnh').value"
             style="padding-top: 8px; border-radius: 8%; height: 197px; width: 205px">
         </p>
       </div>
@@ -233,8 +233,7 @@
         <p>
           <mat-form-field appearance="standard">
             <mat-label>Số điện thoại</mat-label>
-            <input matInput type="number" placeholder="Vui lòng nhập số điện thoại" [formControlName]="'soDienThoai'"
-              required>
+            <input matInput type="number" placeholder="Vui lòng nhập số điện thoại" [formControlName]="'soDienThoai'">
             <mat-icon
               [ngClass]="{'red-icon': !cuDanEditForm.get('soDienThoai').valid && cuDanEditForm.get('soDienThoai').touched}"
               matSuffix>phone
@@ -249,7 +248,7 @@
         <p>
           <mat-form-field appearance="standard">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="pat@example.com" [formControlName]="'email'" required>
+            <input matInput placeholder="pat@example.com" [formControlName]="'email'">
             <mat-icon [ngClass]="{'red-icon': !cuDanEditForm.get('email').valid && cuDanEditForm.get('email').touched}"
               matSuffix>email
             </mat-icon>
@@ -261,7 +260,7 @@
         <p>
           <mat-form-field appearance="standard">
             <mat-label>Ngày sinh</mat-label>
-            <input type="text" [readonly]="readonly" matInput placeholder="Vui lòng nhập ngày sinh"
+            <input type="date" [readonly]="readonly" matInput placeholder="Vui lòng nhập ngày sinh"
               [formControlName]="'ngaySinh'" required>
             <mat-icon
               [ngClass]="{'red-icon': !cuDanEditForm.get('ngaySinh').valid && cuDanEditForm.get('ngaySinh').touched}"
@@ -275,8 +274,8 @@
         <p>
           <mat-form-field appearance="standard">
             <mat-label>Số CCCD</mat-label>
-            <input type="text" [readonly]="readonly" matInput placeholder="Vui lòng nhập ngày sinh"
-              [formControlName]="'soCCCD'" required>
+            <input type="text" [readonly]="readonly" matInput placeholder="Vui lòng nhập CCCD"
+              [formControlName]="'soCCCD'">
             <mat-icon
               [ngClass]="{'red-icon': !cuDanEditForm.get('soCCCD').valid && cuDanEditForm.get('soCCCD').touched}"
               matSuffix>people
@@ -326,7 +325,7 @@
       </mat-panel-title>
 
       <mat-panel-description>
-        Thay đổi thông tin cá nhân
+        Thêm chủ sở hữu thông tin cá nhân
       </mat-panel-description>
     </mat-expansion-panel-header>
     <form (ngSubmit)="createChuSoHuu()" [formGroup]="cuDanAddForm">
@@ -402,7 +401,7 @@
         <p>
           <mat-form-field appearance="standard">
             <mat-label>Số CCCD</mat-label>
-            <input type="text" matInput placeholder="Vui lòng nhập ngày sinh" [formControlName]="'soCCCD'" required>
+            <input type="text" matInput placeholder="Vui lòng nhập CCCD" [formControlName]="'soCCCD'" required>
             <mat-icon [ngClass]="{'red-icon': !cuDanAddForm.get('soCCCD').valid && cuDanAddForm.get('soCCCD').touched}"
               matSuffix>people
             </mat-icon>

@@ -35,6 +35,7 @@ import { AddDichvuComponent } from "./add-dichvu/add-dichvu.component";
 import { AddThecudanComponent } from "./add-thecudan/add-thecudan.component";
 import { AddXecoComponent } from "./add-xeco/add-xeco.component";
 import { DetailDichvuComponent } from "./detail-dichvu/detail-dichvu.component";
+import { CanHo } from '../../../../shared/model/canHo/canho';
 
 export interface PeriodicElement {
   name: string;
@@ -102,6 +103,7 @@ export class DetailEmployeeComponent implements OnInit {
   dichVuKhacList = new MatTableDataSource();
   idCanHo: number;
   role: string;
+  tenCanHo: string;
   constructor(
     private dialog: MatDialog,
     private theCuDanService: ThecudanService,
@@ -371,6 +373,7 @@ export class DetailEmployeeComponent implements OnInit {
   getAllCuDanByCanHo() {
     this.cuDanService.getAllCuDanCanHo(this.idCanHo).subscribe(
       (data) => {
+        this.tenCanHo = data[0].canHo.tenCanHo;
         this.cuDanList.data = data;
         console.log(this.cuDanList.data);
       },

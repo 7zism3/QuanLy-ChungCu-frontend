@@ -224,6 +224,7 @@ export class DichVuComponent implements OnInit {
     );
   }
   getAllDichVuKhacByBoPhan(boPhan: any) {
+    this.boPhan = boPhan;
     this.dichVuService.getAllLoaiSuaChuaByBoPhan(boPhan).subscribe(
       (data) => {
         this.dichVuKhac.data = data;

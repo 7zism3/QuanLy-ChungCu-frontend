@@ -11,7 +11,7 @@
       <div class="card-col">
         <nb-card size="medium">
           <nb-card-header>
-            Cư dân thuộc căn hộ
+            Cư dân thuộc căn hộ <span style="color: blue;">{{this.tenCanHo}}</span>
             <button mat-icon-button color="primary" *ngIf="role == 'Staff_bql'" (click)="openAddCuDan()"
               style="float:right;margin-top: -10px;">
               <mat-icon>add</mat-icon>
@@ -44,7 +44,7 @@
                 </td>
               </ng-container>
               <ng-container matColumnDef="image">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Hình ảnh</th>
                 <td mat-cell *matCellDef="let element"> <img src="{{element.hinhAnh}}" style="width:50px;height:50px;">
                 </td>
               </ng-container>
@@ -182,8 +182,7 @@
           <nb-card-front>
             <nb-card>
               <nb-card-header>
-                Dịch vụ cố định
-
+                Hoá đơn dịch vụ cố định
               </nb-card-header>
               <nb-card-body>
                 <mat-form-field>
@@ -271,14 +270,14 @@
                 </mat-paginator>
               </nb-card-body>
               <nb-card-footer>
-                Dịnh vụ sửa chữa
+                Hoá đơn dịnh vụ sửa chữa
               </nb-card-footer>
             </nb-card>
           </nb-card-front>
           <nb-card-back>
             <nb-card>
               <nb-card-header>
-                Dịnh vụ sửa chữa
+                Hoá đơn dịnh vụ sửa chữa
               </nb-card-header>
               <nb-card-body>
                 <mat-form-field>
@@ -372,7 +371,7 @@
                 </mat-paginator>
               </nb-card-body>
               <nb-card-footer>
-                Dịch vụ cố định
+                Hoá đơn dịch vụ cố định
               </nb-card-footer>
             </nb-card>
           </nb-card-back>
