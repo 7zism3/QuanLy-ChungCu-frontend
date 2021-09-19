@@ -2,7 +2,7 @@
   <mat-icon class="mat-18">print</mat-icon>
 </button>
 <div style="display: flex" *ngIf="this.type == 'HDSC'">
-  <button mat-flat-button color="primary" (click)="openAddHoaDonSuaChuaChiTiet()">Thêm dịch vụ sửa chữa</button>
+  <button mat-flat-button color="primary" (click)="openAddHoaDonSuaChuaChiTiet()">Thêm công việc sửa chữa</button>
   <!-- <nb-actions size="medium">
     <nb-action nbPopoverTrigger="hover" [nbPopover]="card" icon="person-outline" [badgeText]="check.length"
       badgePosition="top right" badgeStatus="warning">
@@ -23,14 +23,14 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+        <!-- <button mat-menu-item *ngIf="this.data.hoaDon.trangThai == false">
           <mat-icon>edit</mat-icon>
           <span>Chỉnh sửa</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item *ngIf="this.data.hoaDon.trangThai == false">
           <mat-icon>lock</mat-icon>
           <span>Xoá</span>
-        </button>
+        </button> -->
       </mat-menu>
     </td>
   </ng-container>
@@ -47,8 +47,13 @@
   <ng-container matColumnDef="soLuong">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Số lượng </th>
     <td mat-cell *matCellDef="let element">
-
       {{element.soLuong}}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="moTa">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Mô tả </th>
+    <td mat-cell *matCellDef="let element">
+      {{element.moTa}}
     </td>
   </ng-container>
   <ng-container matColumnDef="donGia">
@@ -67,6 +72,11 @@
   </tr>
   <!-- <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr> -->
 </table>
+
+
+<!-- -------------------Table 2---------------------------------------- -->
+
+
 <table mat-table *ngIf="this.type == 'HDSC'" [dataSource]="chiTietDichVu" multiTemplateDataRows class="mat-elevation-z8"
   matSort>
   <ng-container matColumnDef="id">
@@ -76,11 +86,11 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+        <button mat-menu-item *ngIf="this.data.hoaDon.trangThai == false" (click)="editAddHoaDonSuaChuaChiTiet(row)">
           <mat-icon>edit</mat-icon>
           <span>Chỉnh sửa</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item *ngIf="this.data.hoaDon.trangThai == false" (click)="onDeleteCCHDSC(row.id)">
           <mat-icon>lock</mat-icon>
           <span>Xoá</span>
         </button>
@@ -102,6 +112,12 @@
     <td mat-cell *matCellDef="let element">
 
       {{element.soLuong}}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="moTa">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Mô tả </th>
+    <td mat-cell *matCellDef="let element">
+      {{element.moTa}}
     </td>
   </ng-container>
   <ng-container matColumnDef="donGia">

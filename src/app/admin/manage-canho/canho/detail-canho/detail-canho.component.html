@@ -152,7 +152,8 @@
                 <mat-list>
                   <!-- <h6><strong>Ô tô</strong></h6> -->
                   <mat-list-item *ngFor="let xeCo of xeCoList">
-                    <h6 mat-line>{{xeCo.loaiXe}} - {{xeCo.tenXe}} - {{xeCo.bienKiemSoat}} </h6>
+                    <h6 mat-line>{{xeCo.loaiXe}} - {{xeCo.tenXe}} - {{xeCo.bienKiemSoat}} - {{xeCo.theCuDan.maThe}}
+                    </h6>
                     <mat-icon *ngIf="role == 'Staff_bql'" (click)="onDeletePhuongTien(xeCo.id)">clear</mat-icon>
                   </mat-list-item>
                   <!-- <h6><strong>Xe máy</strong></h6>
@@ -280,6 +281,15 @@
                 Hoá đơn dịnh vụ sửa chữa
               </nb-card-header>
               <nb-card-body>
+                <div style="display: flex">
+                  <button mat-flat-button color="primary" (click)="openAddHoaDonSuaChua()">Thêm hoá đơn sửa
+                    chữa</button>
+                  <!-- <nb-actions size="medium">
+                            <nb-action nbPopoverTrigger="hover" [nbPopover]="card" icon="person-outline" [badgeText]="check.length"
+                              badgePosition="top right" badgeStatus="warning">
+                            </nb-action>
+                          </nb-actions> -->
+                </div>
                 <mat-form-field>
                   <mat-label>Tìm kiếm</mat-label>
                   <input matInput (keyup)="applyFilterDichVuKhac($event)" placeholder="Nhập dịch vụ cần tìm..." #input>

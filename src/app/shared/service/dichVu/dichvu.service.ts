@@ -1,6 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { AnyCnameRecord } from "dns";
 import { Observable } from "rxjs";
+import { hoaDonSuaChuaCT } from "../../../admin/manage-hoadon/type-utility/add-edit-type-utility/add-edit-type-utility.component";
 import {
   DichVu,
   DichVuChiTiet,
@@ -68,7 +70,7 @@ export class DichvuService {
     return this.http.put(baseUrl + `${thanhToan.id}`, thanhToan);
   }
   thanhToanHDSC(thanhToan: ThanhToanHDDV): Observable<any> {
-    return this.http.put(hoaDonSuaChuaUrl + `${thanhToan.id}`, thanhToan);
+    return this.http.put(hoaDonSuaChuaUrl + `/${thanhToan.id}`, thanhToan);
   }
   findAllHdscByDaThanhToanTrongThang(
     nam: string,
@@ -108,5 +110,17 @@ export class DichvuService {
   }
   createHDSCCT(hoaDonSuaChua: any): Observable<any> {
     return this.http.post(chiTietHoaDonSuaChua, hoaDonSuaChua);
+  }
+
+  deleteHDSCCT(id: any): Observable<any> {
+    return this.http.delete(chiTietHoaDonSuaChua + `/${id}`);
+  }
+
+  deleteHDSC(id: any): Observable<any> {
+    return this.http.delete(hoaDonSuaChuaUrl + `/${id}`);
+  }
+
+  updateCCHDSC(cchdsc: any): Observable<any> {
+    return this.http.put(chiTietHoaDonSuaChua + `/${cchdsc.id}`, cchdsc);
   }
 }

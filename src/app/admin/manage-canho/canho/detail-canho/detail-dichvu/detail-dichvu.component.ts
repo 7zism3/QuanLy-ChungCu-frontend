@@ -10,11 +10,14 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { throwError } from "rxjs";
+import { DialogDeleteSubmitComponent } from "../../../../../shared/component/dialog-submit-delete/dialog-submit-delete.component";
 import { CanHo } from "../../../../../shared/model/canHo/canho";
 import { DichVuChiTiet } from "../../../../../shared/model/dichVu/dichvu";
 import { CanhoService } from "../../../../../shared/service/canHo/canho.service";
 import { DichvuService } from "../../../../../shared/service/dichVu/dichvu.service";
+import { ToastService } from "../../../../../shared/service/toast.service";
 import { AddEditTypeUtilityComponent } from "../../../../manage-hoadon/type-utility/add-edit-type-utility/add-edit-type-utility.component";
+import { AddEditUtilityComponent } from "../../../../manage-hoadon/type-utility/add-edit-utility/add-edit-utility.component";
 import { PrintHoadonComponent } from "../print-hoadon/print-hoadon.component";
 
 @Component({
@@ -25,7 +28,7 @@ import { PrintHoadonComponent } from "../print-hoadon/print-hoadon.component";
 export class DetailDichvuComponent implements OnInit {
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
-  columnsToDisplay = ["stt", "ten", "donGia", "soLuong", "id"];
+  columnsToDisplay = ["stt", "ten", "donGia", "soLuong", "moTa", "id"];
   expandedElement: DichVuChiTiet | null;
   chiTietDichVu = new MatTableDataSource();
   canHo: CanHo = new CanHo();
@@ -34,6 +37,7 @@ export class DetailDichvuComponent implements OnInit {
     private dialog: MatDialog,
     private dichVuService: DichvuService,
     private canHoService: CanhoService,
+    private toastrService: ToastService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -116,5 +120,37 @@ export class DetailDichvuComponent implements OnInit {
     if (this.chiTietDichVu.paginator) {
       this.chiTietDichVu.paginator.firstPage();
     }
+  }
+  onDeleteCCHDSC(id): void {
+    const dialogRef = this.dialog.open(DialogDeleteSubmitComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.dichVuService.deleteHDSCCT(id).subscribe(
+          (data) => {
+            this.chiTietDichVu.data = [];
+            this.getChiTietHoaDonSuaChua();
+            this.toastrService.showToast(
+              "success",
+              "Thành công",
+              "Xóa thành công"
+            );
+          },
+          (error) => {
+            this.toastrService.showToast("danger", "Thất bại", "Xóa thất bại");
+            throwError(error);
+          }
+        );
+      }
+    });
+  }
+  editAddHoaDonSuaChuaChiTiet(data: any) {
+    const dialogRef = this.dialog.open(AddEditUtilityComponent, {
+      data: { data },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.getChiTietHoaDonSuaChua();
+      }
+    });
   }
 }

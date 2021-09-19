@@ -35,7 +35,8 @@ import { AddDichvuComponent } from "./add-dichvu/add-dichvu.component";
 import { AddThecudanComponent } from "./add-thecudan/add-thecudan.component";
 import { AddXecoComponent } from "./add-xeco/add-xeco.component";
 import { DetailDichvuComponent } from "./detail-dichvu/detail-dichvu.component";
-import { CanHo } from '../../../../shared/model/canHo/canho';
+import { CanHo } from "../../../../shared/model/canHo/canho";
+import { AddEditTypeUtilityComponent } from "../../../manage-hoadon/type-utility/add-edit-type-utility/add-edit-type-utility.component";
 
 export interface PeriodicElement {
   name: string;
@@ -224,6 +225,7 @@ export class DetailEmployeeComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
         this.getAllDichVuByCanHo();
+        this.getAllDichVuKhacByCanHo();
       }
     });
   }
@@ -381,5 +383,17 @@ export class DetailEmployeeComponent implements OnInit {
         throwError(error);
       }
     );
+  }
+  openAddHoaDonSuaChua() {
+    const type = "HDSC";
+    const idCanHo = this.idCanHo;
+    const dialogRef = this.dialog.open(AddEditTypeUtilityComponent, {
+      data: { type, idCanHo },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.getAllDichVuKhacByCanHo();
+      }
+    });
   }
 }

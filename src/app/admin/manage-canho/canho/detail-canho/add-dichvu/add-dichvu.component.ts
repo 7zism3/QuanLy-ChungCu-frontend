@@ -96,8 +96,10 @@ export class AddDichvuComponent implements OnInit {
   createThanhToan() {
     if (this.type == "DVCD") {
       this.createThanhToanDv();
-    } else if (this.type == "DCSC") {
+      console.log("DVCD --- ");
+    } else if (this.type == "DVSC") {
       this.createThanhToanSc();
+      console.log("DVSC --- ");
     }
   }
 }

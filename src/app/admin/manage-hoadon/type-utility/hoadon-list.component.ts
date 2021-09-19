@@ -77,6 +77,7 @@ export class HoaDonListComponent implements OnInit {
   ];
   expandedElement: DichVu | null;
   expandedElementSuaChua: DichVu | null;
+
   constructor(
     private dialog: MatDialog,
     private toastrService: ToastService,
@@ -175,5 +176,32 @@ export class HoaDonListComponent implements OnInit {
     this.hoaDonDichVu.sort = this.tableOneSort;
     this.hoaDonSuaChua.paginator = this.tableTwoPaginator;
     this.hoaDonSuaChua.sort = this.tableTwoSort;
+  }
+
+  onDeleteHDSC(id): void {
+    const dialogRef = this.dialog.open(DialogDeleteSubmitComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.dichVuService.deleteHDSC(id).subscribe(
+          (data) => {
+            this.hoaDonDichVu.data = data;
+            this.getAllHoaDonSuaChua();
+            this.toastrService.showToast(
+              "success",
+              "Thành công",
+              "Xóa thành công"
+            );
+          },
+          (error) => {
+            this.toastrService.showToast(
+              "danger",
+              "Thất bại",
+              "Vui lòng xoá chi tiết trước"
+            );
+            throwError(error);
+          }
+        );
+      }
+    });
   }
 }

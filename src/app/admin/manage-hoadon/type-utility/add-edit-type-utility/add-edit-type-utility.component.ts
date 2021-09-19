@@ -36,6 +36,8 @@ export class AddEditTypeUtilityComponent implements OnInit {
   type: string;
   idBoPhan: any;
   boPhan2: any;
+  canHo2: any;
+  idCanHo: any;
   constructor(
     private toastrService: ToastService,
     private dialogRef: MatDialogRef<AddEditTypeUtilityComponent>,
@@ -47,8 +49,15 @@ export class AddEditTypeUtilityComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (this.data.idCanHo) {
+      this.idCanHo = this.data.idCanHo;
+      this.getCanHoBy(this.data.idCanHo);
+    }
     this.type = this.data.type;
-
+    console.log(this.data.hoaDon);
+    if (this.type == "HDSCCT") {
+      this.getAllDichVuKhacByIdBoPhan(this.data.hoaDon.nhanVien.boPhan.id);
+    }
     this.getAllBoPhan();
     this.getAllCanHo();
     this.listHoaDonSuaChuaCT.push(new hoaDonSuaChuaCT());
@@ -59,7 +68,7 @@ export class AddEditTypeUtilityComponent implements OnInit {
     };
     this.hoaDonSuaChuaForm = new FormGroup({
       id: new FormControl(null),
-      canHo: new FormControl(null, Validators.required),
+      canHo: new FormControl(null),
       boPhan: new FormControl(null, Validators.required),
       nhanVien: new FormControl(null, Validators.required),
     });
@@ -128,6 +137,17 @@ export class AddEditTypeUtilityComponent implements OnInit {
       }
     );
   }
+  getCanHoBy(id: any) {
+    this.canHoService.getCanHoById(id).subscribe(
+      (data) => {
+        this.canHo2 = data;
+        console.log(this.dichVuKhac);
+      },
+      (error) => {
+        throwError(error);
+      }
+    );
+  }
   private getAllDichVuKhac() {
     this.dichVuService.getAllLoaiSuaChua().subscribe(
       (data) => {
@@ -163,8 +183,9 @@ export class AddEditTypeUtilityComponent implements OnInit {
   }
   createHDSC() {
     this.hoaDonSuaChua.nhanVien = this.hoaDonSuaChuaForm.get("nhanVien").value;
-    (this.hoaDonSuaChua.trangThai = false),
-      (this.hoaDonSuaChua.canHo = this.hoaDonSuaChuaForm.get("canHo").value);
+    this.hoaDonSuaChua.trangThai = false;
+    if (this.data.idCanHo) this.hoaDonSuaChua.canHo = this.canHo2;
+    else this.hoaDonSuaChua.canHo = this.hoaDonSuaChuaForm.get("canHo").value;
     this.dichVuService.createHDSC(this.hoaDonSuaChua).subscribe(
       (data) => {
         this.listHoaDonSuaChuaCT.forEach((element) => {

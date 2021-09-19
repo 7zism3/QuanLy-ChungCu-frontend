@@ -34,6 +34,7 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
+
                 <button (click)="openDetailDichVu(row,'HDDV')" mat-menu-item>
                   <mat-icon>edit</mat-icon>
                   <span>Chi tiết</span>
@@ -128,6 +129,11 @@
                   <mat-icon>edit</mat-icon>
                   <span>Chi tiết</span>
                 </button>
+                <button mat-menu-item *ngIf="row.trangThai == false" (click)="onDeleteHDSC(row.id)">
+                  <mat-icon>delete</mat-icon>
+                  <span>Xoá</span>
+                </button>
+
 
               </mat-menu>
             </td>

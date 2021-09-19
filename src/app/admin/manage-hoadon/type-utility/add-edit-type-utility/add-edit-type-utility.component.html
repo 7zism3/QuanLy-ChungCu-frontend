@@ -1,6 +1,6 @@
 <h4 *ngIf="this.type =='HDSC'" mat-dialog-title>THÊM HOÁ ĐƠN SỬA CHỮA</h4>
 <form *ngIf="this.type =='HDSC'" (ngSubmit)="submitAction()" [formGroup]="hoaDonSuaChuaForm">
-  <p>
+  <p *ngIf="this.idCanHo == null">
     <mat-form-field appearance="standard">
       <mat-label>Căn hộ</mat-label>
       <mat-select [formControlName]="'canHo'">
@@ -49,7 +49,7 @@
     </mat-form-field>
   </p>
 </form>
-<p>
+<!-- <p>
   <mat-form-field appearance="standard" *ngIf="this.type == 'HDSCCT'">
     <mat-label>Bộ phận</mat-label>
     <mat-select name="boPhan" [(ngModel)]="boPhan2">
@@ -58,7 +58,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-</p>
+</p> -->
 <a href="javascript:void(0);" (click)="addNewCriteria()"><i class="fas fa-plus-circle"></i> Thêm sửa
   chữa</a>
 <div class="row form-group">
