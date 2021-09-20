@@ -118,6 +118,7 @@ export class NhanVienComponent implements OnInit {
       if (result === true) {
         this.boPhanService.deleteNhanVien(nhanVien).subscribe(
           (data) => {
+            this.dataSource.data = [];
             this.getAllNhanVienByIdBoPhan();
             this.toastrService.showToast(
               "success",
@@ -127,7 +128,11 @@ export class NhanVienComponent implements OnInit {
           },
           (error) => {
             throwError(error);
-            this.toastrService.showToast("danger", "Thất bại", "Xoá thất bại");
+            this.toastrService.showToast(
+              "danger",
+              "Thất bại",
+              "Chỉ xoá được khi không có thành phần liên quan \nVui lòng kiểm tra chi tiết"
+            );
           }
         );
       }

@@ -260,7 +260,7 @@
         <p>
           <mat-form-field appearance="standard">
             <mat-label>Ngày sinh</mat-label>
-            <input type="date" [readonly]="readonly" matInput placeholder="Vui lòng nhập ngày sinh"
+            <input type="text" [readonly]="readonly" matInput placeholder="Vui lòng nhập ngày sinh"
               [formControlName]="'ngaySinh'" required>
             <mat-icon
               [ngClass]="{'red-icon': !cuDanEditForm.get('ngaySinh').valid && cuDanEditForm.get('ngaySinh').touched}"

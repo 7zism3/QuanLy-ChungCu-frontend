@@ -86,7 +86,11 @@ export class PhongBanComponent implements OnInit, AfterViewInit {
       },
       (error) => {
         throwError(error);
-        this.toastrService.showToast("danger", "Thất bại", "Xoá thất bại");
+        this.toastrService.showToast(
+          "danger",
+          "Thất bại",
+          "Chỉ xoá được khi không có thành phần liên quan \nVui lòng kiểm tra chi tiết"
+        );
       }
     );
   }

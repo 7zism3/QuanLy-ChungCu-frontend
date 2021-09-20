@@ -126,7 +126,7 @@
                 <mat-list>
                   <mat-list-item *ngFor="let theCuDan of theCuDanList">
                     <h4 mat-line>{{theCuDan.maThe}} - {{theCuDan.ngayTao | date}} -
-                      {{theCuDan.kichHoat ? "Đã sử dụng" : "Chưa sử dụng"}}</h4>
+                      {{theCuDan.kichHoat ? "Đã gắn phương tiện" : "Chưa gắn phương tiện"}}</h4>
                     <mat-icon *ngIf="role == 'Staff_bql'" (click)="openEditTheCuDan(theCuDan.maThe)">edit</mat-icon>
                     <mat-icon *ngIf="role == 'Staff_bql'" (click)="onDeleteTheCuDan(theCuDan.id)">clear</mat-icon>
                   </mat-list-item>
