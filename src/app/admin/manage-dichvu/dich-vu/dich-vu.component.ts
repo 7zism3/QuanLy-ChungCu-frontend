@@ -297,6 +297,7 @@ export class DichVuComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
+        this.getAllDichVuKhacByBoPhan(1);
       }
     });
   }

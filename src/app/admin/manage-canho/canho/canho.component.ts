@@ -30,6 +30,7 @@ import { AddCudanComponent } from "./add-cudan/add-cudan.component";
 import { CanHo } from "../../../shared/model/canHo/canho";
 import { AddTaikhoanCanhoComponent } from "./add-taikhoan-canho/add-taikhoan-canho.component";
 import { Router } from "@angular/router";
+import { DialogDeleteSubmitComponent } from "../../../shared/component/dialog-submit-delete/dialog-submit-delete.component";
 
 @Component({
   selector: "ngx-list-employee",
@@ -197,7 +198,7 @@ export class CanHoComponent implements OnInit, AfterViewInit {
         this.canHoKhongHoatDong.data = [];
         this.getAllCanHoKhongHoatDong();
         this.getAllCanHo();
-        this.router.navigateByUrl("/admin/manage-canho/detail/"+ canHo.id);
+        this.router.navigateByUrl("/admin/manage-canho/detail/" + canHo.id);
       }
     });
   }
@@ -241,7 +242,27 @@ export class CanHoComponent implements OnInit, AfterViewInit {
       }
     });
   }
-
+  onDeleteCanHoChuaSuDung(id: number) {
+    const dialogRef = this.dialog.open(DialogDeleteSubmitComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.canHoService.deleteCanHo(id).subscribe(
+          (data) => {
+            this.getAllCanHoKhongHoatDong();
+            this.toastrService.showToast(
+              "success",
+              "Thành công",
+              "Xoá thành công"
+            );
+          },
+          (error) => {
+            throwError(error);
+            this.toastrService.showToast("danger", "Thất bại", "Xoá thất bại");
+          }
+        );
+      }
+    });
+  }
   onDelete(id: number) {
     const dialogRef = this.dialog.open(DialogSubmitLockComponent);
     dialogRef.afterClosed().subscribe((result) => {

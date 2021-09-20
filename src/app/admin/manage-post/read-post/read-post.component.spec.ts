@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddThecudanComponent } from './add-thecudan.component';
+import { ReadPostComponent } from './read-post.component';
 
-describe('AddThecudanComponent', () => {
-  let component: AddThecudanComponent;
-  let fixture: ComponentFixture<AddThecudanComponent>;
+describe('ReadPostComponent', () => {
+  let component: ReadPostComponent;
+  let fixture: ComponentFixture<ReadPostComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddThecudanComponent ]
+      declarations: [ ReadPostComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddThecudanComponent);
+    fixture = TestBed.createComponent(ReadPostComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

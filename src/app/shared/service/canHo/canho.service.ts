@@ -15,6 +15,9 @@ export class CanhoService {
   updateCanHo(canHo: CanHo): Observable<any> {
     return this.http.put(baseUrl + `${canHo.id}`, canHo);
   }
+  deleteCanHo(canHo: any): Observable<any> {
+    return this.http.delete<any>(baseUrl + canHo.id);
+  }
   getAllCanHo(): Observable<Array<any>> {
     return this.http.get<Array<any>>(baseUrl + "hoat-dong");
   }

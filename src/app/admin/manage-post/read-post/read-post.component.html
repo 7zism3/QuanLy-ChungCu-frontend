@@ -1,0 +1,24 @@
+<form (ngSubmit)="submitAction()" [formGroup]="postEditForm">
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Tiêu đề</mat-label>
+      <input matInput placeholder="Vui lòng nhập tiêu đề" [formControlName]="'tieuDe'" readonly>
+      <mat-icon [ngClass]="{'red-icon': !postEditForm.get('tieuDe').valid && postEditForm.get('tieuDe').touched}"
+        matSuffix>
+        Title
+      </mat-icon>
+      <mat-hint *ngIf="!postEditForm.get('tieuDe').valid && postEditForm.get('tieuDe').touched"
+        style="color: rgb(211, 102, 102);">Error is blank
+      </mat-hint>
+    </mat-form-field>
+  </p>
+
+  <div style="font-size: 16px; padding-bottom: 5px; ">Nội dung:</div>
+  <!-- <ckeditor [config]="{ extraPlugins: 'divarea', height: '150', width:'750'}" [formControlName]="'noiDung'">
+  </ckeditor> -->
+  <textarea matInput placeholder="Vui lòng nhập nội dung" [formControlName]="'noiDung'" rows="4" cols="50"
+    readonly></textarea>
+  <mat-dialog-actions align="end">
+    <button mat-flat-button mat-dialog-close>Thoát</button>
+  </mat-dialog-actions>
+</form>

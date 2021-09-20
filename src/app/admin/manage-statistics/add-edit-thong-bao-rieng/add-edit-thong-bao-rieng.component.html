@@ -1,20 +1,7 @@
 <h4 *ngIf="this.type =='Edit'" mat-dialog-title>SỬA THÔNG BÁO</h4>
 <h4 *ngIf="this.type =='Add'" mat-dialog-title>THÊM THÔNG BÁO</h4>
 <form *ngIf="this.type =='Add'" (ngSubmit)="submitAction()" [formGroup]="postForm">
-  <p>
-    <mat-form-field appearance="standard">
-      <mat-label>Căn hộ</mat-label>
-      <mat-select [formControlName]="'canHo'">
-        <mat-option *ngFor="let ch of canHo" [value]="ch">
-          {{ch.tenCanHo}}
-        </mat-option>
-      </mat-select>
-      <mat-icon [ngClass]="{'red-icon': !postForm.get('canHo').valid && postForm.get('canHo').touched}" matSuffix>
-        description</mat-icon>
-      <mat-hint *ngIf="!postForm.get('canHo').valid && postForm.get('canHo').touched"
-        style="color: rgb(211, 102, 102);">Error is blank</mat-hint>
-    </mat-form-field>
-  </p>
+
   <p>
     <mat-form-field appearance="standard">
       <mat-label>Tiêu đề</mat-label>

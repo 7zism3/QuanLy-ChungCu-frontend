@@ -4,6 +4,8 @@ import { Observable } from "rxjs";
 
 const baseUrl = "/api/thong-bao/";
 const thongBaoRiengUrl = "/api/thong-bao-rieng/";
+const canHoUrl = "/api/can-ho/";
+
 @Injectable({
   providedIn: "root",
 })
@@ -25,7 +27,7 @@ export class ThongBaoService {
   }
   // riêng
   getAllThongBaoRiengByCanHo(id: string): Observable<any> {
-    return this.http.get<any>("/api/can-ho/" + id + "/thong-bao-rieng");
+    return this.http.get<any>("/api/can-ho/" + id + "/thong-bao-rieng2");
   }
   getAllThongBaoRieng(): Observable<any> {
     return this.http.get<any>(thongBaoRiengUrl);

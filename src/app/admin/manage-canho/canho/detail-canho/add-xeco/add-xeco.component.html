@@ -46,6 +46,18 @@
     </p>
     <p>
       <mat-form-field appearance="standard">
+        <mat-label>Biển kiểm soát</mat-label>
+        <input matInput type="text" placeholder="Vui lòng nhập biển kiểm soát" [formControlName]="'bienKiemSoat'"
+          required>
+        <mat-icon [ngClass]="{'red-icon': !xeCoForm.get('bienKiemSoat').valid && xeCoForm.get('bienKiemSoat').touched}"
+          matSuffix>
+          description</mat-icon>
+        <mat-hint *ngIf="!xeCoForm.get('bienKiemSoat').valid && xeCoForm.get('bienKiemSoat').touched"
+          style="color: rgb(211, 102, 102);">Error is blank</mat-hint>
+      </mat-form-field>
+    </p>
+    <!-- <p>
+      <mat-form-field appearance="standard">
         <mat-label>Cư dân</mat-label>
         <mat-select [formControlName]="'cuDan'">
           <mat-option *ngFor="let cd of cuDanList" [value]="cd">
@@ -57,22 +69,7 @@
         <mat-hint *ngIf="!xeCoForm.get('cuDan').valid && xeCoForm.get('cuDan').touched"
           style="color: rgb(211, 102, 102);">Error is blank</mat-hint>
       </mat-form-field>
-    </p>
-  </div>
-  <div class="full-name-inputs">
-    <p>
-      <mat-form-field appearance="standard">
-        <mat-label>Biển kiểm soát</mat-label>
-        <input matInput type="text" placeholder="Vui lòng nhập biển kiểm soát" [formControlName]="'bienKiemSoat'"
-          required>
-        <mat-icon [ngClass]="{'red-icon': !xeCoForm.get('bienKiemSoat').valid && xeCoForm.get('bienKiemSoat').touched}"
-          matSuffix>
-          description</mat-icon>
-        <mat-hint *ngIf="!xeCoForm.get('bienKiemSoat').valid && xeCoForm.get('bienKiemSoat').touched"
-          style="color: rgb(211, 102, 102);">Error is blank</mat-hint>
-      </mat-form-field>
-    </p>
-
+    </p> -->
   </div>
 
   <mat-dialog-actions align="end">

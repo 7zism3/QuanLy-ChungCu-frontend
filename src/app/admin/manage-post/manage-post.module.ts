@@ -36,9 +36,10 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {CKEditorModule} from "ng2-ckeditor";
+import { ReadPostComponent } from './read-post/read-post.component';
 
 @NgModule({
-  declarations: [ManagePostComponent, TypePostComponent, PostComponent, AddEditPostComponent, AddEditTypePostComponent],
+  declarations: [ManagePostComponent, TypePostComponent, PostComponent, AddEditPostComponent, AddEditTypePostComponent, ReadPostComponent],
   imports: [
     FormsModule,
     ReactiveFormsModule,

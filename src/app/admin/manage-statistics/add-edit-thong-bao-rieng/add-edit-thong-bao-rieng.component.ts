@@ -2,20 +2,19 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { throwError } from "rxjs";
-import { TypePostRequest } from "../../../../shared/model/type-post/type-post-request";
-import { TypePostService } from "../../../../shared/service/type-post.service";
-import { ToastService } from "../../../../shared/service/toast.service";
-import { TypePostResponse } from "../../../../shared/model/type-post/type-post-response";
-import { PostService } from "../../../../shared/service/post.service";
-import { ThongBaoService } from "../../../../shared/service/thongBao/thong-bao.service";
-import { CanhoService } from "../../../../shared/service/canHo/canho.service";
+import { TypePostResponse } from "../../../shared/model/type-post/type-post-response";
+import { ToastService } from "../../../shared/service/toast.service";
+import { PostService } from "../../../shared/service/post.service";
+import { TypePostService } from "../../../shared/service/type-post.service";
+import { ThongBaoService } from "../../../shared/service/thongBao/thong-bao.service";
+import { CanhoService } from "../../../shared/service/canHo/canho.service";
 
 @Component({
-  selector: "ngx-add-edit-type-post",
-  templateUrl: "./add-edit-type-post.component.html",
-  styleUrls: ["./add-edit-type-post.component.scss"],
+  selector: "ngx-add-edit-thong-bao-rieng",
+  templateUrl: "./add-edit-thong-bao-rieng.component.html",
+  styleUrls: ["./add-edit-thong-bao-rieng.component.scss"],
 })
-export class AddEditTypePostComponent implements OnInit {
+export class AddEditThongBaoRiengComponent implements OnInit {
   postForm: FormGroup;
   postRequest: any;
   postEditForm: FormGroup;
@@ -26,7 +25,7 @@ export class AddEditTypePostComponent implements OnInit {
   canHo: any;
   constructor(
     private toastrService: ToastService,
-    private dialogRef: MatDialogRef<AddEditTypePostComponent>,
+    private dialogRef: MatDialogRef<AddEditThongBaoRiengComponent>,
     private postService: PostService,
     private typePostService: TypePostService,
     @Inject(MAT_DIALOG_DATA) private data,
@@ -35,7 +34,7 @@ export class AddEditTypePostComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getAllCanHo();
+    this.getCanHoById();
     this.type = this.data.type;
     this.postRequest = {
       noiDung: null,
@@ -62,17 +61,15 @@ export class AddEditTypePostComponent implements OnInit {
       id: new FormControl(null),
       tieuDe: new FormControl(null, Validators.required),
       noiDung: new FormControl(null, Validators.required),
-      canHo: new FormControl(null, Validators.required),
     });
     if (this.type == "Edit") {
       this.postEditForm.patchValue(this.data.idPost);
     }
   }
-  private getAllCanHo() {
-    this.canHoService.getAllCanHo().subscribe(
+  private getCanHoById() {
+    this.canHoService.getCanHoById(this.data.idCanHo).subscribe(
       (data) => {
         this.canHo = data;
-        console.log(this.canHo);
       },
       (error) => {
         throwError(error);
@@ -88,10 +85,10 @@ export class AddEditTypePostComponent implements OnInit {
   }
 
   createPost() {
-    this.postRequest.canHo = this.postForm.get("canHo").value;
+    this.postRequest.canHo = this.canHo;
     this.postRequest.tieuDe = this.postForm.get("tieuDe").value;
     this.postRequest.noiDung = this.postForm.get("noiDung").value;
-    this.postRequest.cuDanGui = false;
+    this.postRequest.cuDanGui = true;
     this.postRequest.trangThai = false;
     console.log(this.postRequest);
     this.thongBaoService.createThongBaoRieng(this.postRequest).subscribe(
@@ -116,8 +113,8 @@ export class AddEditTypePostComponent implements OnInit {
     this.postEditRequest.tieuDe = this.postEditForm.get("tieuDe").value;
     this.postEditRequest.ngayTao = this.data.idPost.ngayTao;
     this.postEditRequest.trangThai = false;
-    this.postEditRequest.canHo = this.data.idPost.canHo;
-    this.postEditRequest.cuDanGui = false;
+    this.postEditRequest.canHo = this.canHo;
+    this.postEditRequest.cuDanGui = true;
     console.log(this.postEditRequest);
     this.thongBaoService.updateThongBaoRieng(this.postEditRequest).subscribe(
       (data) => {

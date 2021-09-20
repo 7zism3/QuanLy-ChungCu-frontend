@@ -12,6 +12,7 @@ import { ToastService } from "../../../shared/service/toast.service";
 import { ThongBaoService } from "../../../shared/service/thongBao/thong-bao.service";
 import { AddEditPostComponent } from "../post/add-edit-post/add-edit-post.component";
 import { AddEditTypePostComponent } from "./add-edit-type-post/add-edit-type-post.component";
+import { ReadPostComponent } from "../read-post/read-post.component";
 
 @Component({
   selector: "ngx-type-post",
@@ -19,7 +20,15 @@ import { AddEditTypePostComponent } from "./add-edit-type-post/add-edit-type-pos
   styleUrls: ["./type-post.component.scss"],
 })
 export class TypePostComponent implements OnInit {
-  displayedColumns: string[] = ["tieuDe", "noiDung", "ngayTao", "canHo", "id"];
+  displayedColumns: string[] = [
+    "cuDanGui",
+    "tieuDe",
+    "noiDung",
+    "ngayTao",
+    "canHo",
+    "trangThai",
+    "id",
+  ];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -79,6 +88,26 @@ export class TypePostComponent implements OnInit {
   editPost(idPost) {
     const type = "Edit";
     const dialogRef = this.dialog.open(AddEditTypePostComponent, {
+      data: { idPost: idPost, type },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.getAllPost();
+      }
+    });
+  }
+  daDoc(data: any) {
+    data.trangThai = true;
+    this.thongBaoService.updateThongBaoRieng(data).subscribe((res) => {
+      this.getAllPost();
+    });
+  }
+  readPost(idPost) {
+    if (idPost.cuDanGui == true) {
+      this.daDoc(idPost);
+    }
+    const type = "Edit";
+    const dialogRef = this.dialog.open(ReadPostComponent, {
       data: { idPost: idPost, type },
     });
     dialogRef.afterClosed().subscribe((result) => {

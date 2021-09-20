@@ -19,6 +19,11 @@ export class ThecudanService {
   getAllTheCuDanByCanHo(id: number): Observable<Array<any>> {
     return this.http.get<Array<any>>(canHoUrl + id + "/the-cu-dan");
   }
+  getAllTheCuDanByCanHoChuaKichHoat(id: number): Observable<Array<any>> {
+    return this.http.get<Array<any>>(
+      canHoUrl + id + "/the-cu-dan/chua-kich-hoat"
+    );
+  }
   getAllTheCuDan(): Observable<Array<any>> {
     return this.http.get<Array<any>>(baseUrl);
   }

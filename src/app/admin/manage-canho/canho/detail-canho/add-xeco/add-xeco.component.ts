@@ -21,7 +21,7 @@ import { XecoService } from "../../../../../shared/service/xeCo/xeco.service";
   styleUrls: ["./add-xeco.component.scss"],
 })
 export class AddXecoComponent implements OnInit {
-  xeCo: XeCo = new XeCo();
+  xeCo: any;
   xeCoForm: FormGroup;
   canHo: CanHo = new CanHo();
   canHoForm: FormGroup;
@@ -29,6 +29,7 @@ export class AddXecoComponent implements OnInit {
   typeAction: string;
   cuDanList: CuDan[] = [];
   theCuDanList: TheCuDan[] = [];
+  dataCanHo: any;
   constructor(
     private toastrService: ToastService,
     private dialogRef: MatDialogRef<AddXecoComponent>,
@@ -50,27 +51,26 @@ export class AddXecoComponent implements OnInit {
       loaiXe: null,
       tenXe: null,
       bienKiemSoat: undefined,
-      cuDan: null,
+      canHo: null,
       theCuDan: null,
     };
     this.xeCoForm = new FormGroup({
       loaiXe: new FormControl(null, Validators.required),
       tenXe: new FormControl(null, Validators.required),
       bienKiemSoat: new FormControl(null, Validators.required),
-      cuDan: new FormControl(null, Validators.required),
       theCuDan: new FormControl(null, Validators.required),
     });
 
-    // if (this.data.id) {
-    //   this.canHoService.getCanHoById(this.data.id).subscribe(
-    //     (data) => {
-    //       this.canHoEditForm.patchValue(data);
-    //     },
-    //     (error) => {
-    //       throwError(error);
-    //     }
-    //   );
-    // }
+    if (this.data.id) {
+      this.canHoService.getCanHoById(this.data.id).subscribe(
+        (data) => {
+          this.dataCanHo = data;
+        },
+        (error) => {
+          throwError(error);
+        }
+      );
+    }
   }
   getAllCuDanByCanHo() {
     this.cuDanService.getAllCuDanCanHo(this.data.id).subscribe(
@@ -83,20 +83,23 @@ export class AddXecoComponent implements OnInit {
     );
   }
   getAllTheCuDanChuaSuDungByCanHo() {
-    this.theCuDanService.getAllTheCuDanByCanHo(this.data.id).subscribe(
-      (data) => {
-        this.theCuDanList = data;
-      },
-      (error) => {
-        throwError(error);
-      }
-    );
+    this.theCuDanService
+      .getAllTheCuDanByCanHoChuaKichHoat(this.data.id)
+      .subscribe(
+        (data) => {
+          this.theCuDanList = data;
+        },
+        (error) => {
+          throwError(error);
+        }
+      );
   }
   createPhuongTien() {
     this.xeCo.loaiXe = this.xeCoForm.get("loaiXe").value;
     this.xeCo.tenXe = this.xeCoForm.get("tenXe").value;
     this.xeCo.bienKiemSoat = this.xeCoForm.get("bienKiemSoat").value;
-    this.xeCo.cuDan = this.xeCoForm.get("cuDan").value;
+    // this.xeCo.cuDan = this.xeCoForm.get("cuDan").value;
+    this.xeCo.canHo = this.dataCanHo;
     this.xeCo.theCuDan = this.xeCoForm.get("theCuDan").value;
     this.xeCoService.createPhuongTien(this.xeCo).subscribe(
       (data) => {

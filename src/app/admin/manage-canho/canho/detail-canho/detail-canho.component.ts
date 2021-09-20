@@ -37,6 +37,7 @@ import { AddXecoComponent } from "./add-xeco/add-xeco.component";
 import { DetailDichvuComponent } from "./detail-dichvu/detail-dichvu.component";
 import { CanHo } from "../../../../shared/model/canHo/canho";
 import { AddEditTypeUtilityComponent } from "../../../manage-hoadon/type-utility/add-edit-type-utility/add-edit-type-utility.component";
+import { DialogDeleteSubmitComponent } from "../../../../shared/component/dialog-submit-delete/dialog-submit-delete.component";
 
 export interface PeriodicElement {
   name: string;
@@ -176,7 +177,7 @@ export class DetailEmployeeComponent implements OnInit {
     });
   }
   onDeleteTheCuDan(id: number) {
-    const dialogRef = this.dialog.open(DialogSubmitLockComponent);
+    const dialogRef = this.dialog.open(DialogDeleteSubmitComponent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
         this.theCuDanService.deleteTheCuDan(id).subscribe(
@@ -185,12 +186,16 @@ export class DetailEmployeeComponent implements OnInit {
             this.toastrService.showToast(
               "success",
               "Thành công",
-              "Khóa thành công"
+              "Xoá thành công"
             );
           },
           (error) => {
             throwError(error);
-            this.toastrService.showToast("danger", "Thất bại", "Khóa thất bại");
+            this.toastrService.showToast(
+              "danger",
+              "Thất bại",
+              "Bạn cần xoá phương tiện gắn kèm trước"
+            );
           }
         );
       }
@@ -203,6 +208,7 @@ export class DetailEmployeeComponent implements OnInit {
         this.xeCoService.deletePhuongTien(id).subscribe(
           (data) => {
             this.getAllXeCoByCanHo();
+            this.getAllTheCuDanByCanHo();
             this.toastrService.showToast(
               "success",
               "Thành công",
@@ -238,6 +244,7 @@ export class DetailEmployeeComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
         this.getAllXeCoByCanHo();
+        this.getAllTheCuDanByCanHo();
       }
     });
   }

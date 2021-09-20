@@ -1,5 +1,5 @@
 <h4 *ngIf="this.type =='Edit'" mat-dialog-title>SỬA THÔNG BÁO</h4>
-<h4 *ngIf="this.type =='Add'" mat-dialog-title>THÊM THÔNG BÁO</h4>
+<h4 *ngIf="this.type =='Add'" mat-dialog-title>THÊM THÔNG BÁO CHUNG</h4>
 <form *ngIf="this.type =='Add'" (ngSubmit)="submitAction()" [formGroup]="postForm">
   <p>
     <mat-form-field appearance="standard">
@@ -14,9 +14,11 @@
     </mat-form-field>
   </p>
 
-  <div style="font-size: 16px; padding-bottom: 5px; ">Bài viết:</div>
-  <ckeditor [config]="{ extraPlugins: 'divarea', height: '150', width:'750'}" [formControlName]="'noiDung'">
-  </ckeditor>
+  <div style="font-size: 16px; padding-bottom: 5px; ">Nội dung:</div>
+  <textarea matInput placeholder="Vui lòng nhập nội dung" [formControlName]="'noiDung'" rows="4" cols="50"
+    required></textarea>
+  <!-- <ckeditor [config]="{ extraPlugins: 'divarea', height: '150', width:'750'}" [formControlName]="'noiDung'">
+  </ckeditor> -->
   <mat-dialog-actions align="end">
     <button mat-flat-button mat-dialog-close>Thoát</button>
     <button [disabled]="(!postForm.valid)" mat-flat-button color="primary">Thêm</button>
@@ -37,9 +39,11 @@
     </mat-form-field>
   </p>
 
-  <div style="font-size: 16px; padding-bottom: 5px; ">Bài viết:</div>
-  <ckeditor [config]="{ extraPlugins: 'divarea', height: '150', width:'750'}" [formControlName]="'noiDung'">
-  </ckeditor>
+  <div style="font-size: 16px; padding-bottom: 5px; ">Nội dung:</div>
+  <!-- <ckeditor [config]="{ extraPlugins: 'divarea', height: '150', width:'750'}" [formControlName]="'noiDung'">
+  </ckeditor> -->
+  <textarea matInput placeholder="Vui lòng nhập nội dung" [formControlName]="'noiDung'" rows="4" cols="50"
+    required></textarea>
   <mat-dialog-actions align="end">
     <button mat-flat-button mat-dialog-close>Thoát</button>
     <button [disabled]="(!postEditForm.valid)" mat-flat-button color="primary">Sửa</button>

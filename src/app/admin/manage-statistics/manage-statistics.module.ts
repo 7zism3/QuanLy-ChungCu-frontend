@@ -33,6 +33,9 @@ import { AccordionComponent } from "../../shared/component/module/layout/accordi
 import { NewsPostComponent } from "../../shared/component/module/layout/infinite-list/news-post/news-post.component";
 import { InfiniteListComponent } from "../../shared/component/module/layout/infinite-list/infinite-list.component";
 import { NewsPostPlaceholderComponent } from "../../shared/component/module/layout/infinite-list/news-post-placeholder/news-post-placeholder.component";
+import { AddEditThongBaoRiengComponent } from "./add-edit-thong-bao-rieng/add-edit-thong-bao-rieng.component";
+import { MatSelectModule } from "@angular/material/select";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -47,6 +50,7 @@ import { NewsPostPlaceholderComponent } from "../../shared/component/module/layo
     InfiniteListComponent,
     NewsPostComponent,
     AccordionComponent,
+    AddEditThongBaoRiengComponent,
   ],
   imports: [
     CommonModule,
@@ -70,6 +74,8 @@ import { NewsPostPlaceholderComponent } from "../../shared/component/module/layo
     MatDatepickerModule,
     NbListModule,
     NbAccordionModule,
+    MatSelectModule,
+    MatDialogModule,
   ],
 })
 export class ManageStatisticsModule {}

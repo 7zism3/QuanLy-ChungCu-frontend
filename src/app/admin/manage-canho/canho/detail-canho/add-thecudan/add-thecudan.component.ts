@@ -59,7 +59,7 @@ export class AddThecudanComponent implements OnInit {
   createTheCuDan() {
     this.theCuDan.maThe = this.theCuDanForm.get("maThe").value;
     this.theCuDan.ngayTao = null;
-    this.theCuDan.kichHoat = true;
+    this.theCuDan.kichHoat = false;
     this.theCuDan.canHo = this.canHo;
     console.log(this.theCuDan);
     this.theCuDanService.createTheCuDan(this.theCuDan).subscribe(
